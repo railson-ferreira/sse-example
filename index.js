@@ -14,7 +14,7 @@ app.get('/status', (request, response) => response.json({clients: clients.length
 const PORT = process.env.PORT || 3000;
 
 let clients = [];
-let facts = [];
+let facts = [{"foo":"bar"}];
 
 function eventsHandler(request, response, next) {
     const headers = {
@@ -24,9 +24,15 @@ function eventsHandler(request, response, next) {
     };
     response.writeHead(200, headers);
 
-    // const data = `data: ${JSON.stringify(facts)}\n\n`;
-    //
-    // response.write(data);
+    // Initial message
+    facts.forEach(fact=>{
+        response.write([
+            `id: ${facts.indexOf(fact)}\n`,
+            `event: CustomEvent\n`,
+            `data: ${JSON.stringify(fact)}\n`,
+            "\n"
+        ].join(""));
+    })
 
     const clientId = Date.now();
 
