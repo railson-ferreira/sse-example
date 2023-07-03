@@ -1,6 +1,6 @@
 FROM node:18-alpine
 
-ENV PORT 8080
+ENV PORT 80
 
 WORKDIR app
 
@@ -18,4 +18,4 @@ COPY . .
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
-EXPOSE 8080/tcp
+EXPOSE 80/tcp
